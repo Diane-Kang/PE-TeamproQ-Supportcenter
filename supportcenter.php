@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Customized Supportcenter - TeamProQ by PageEffect 
+Plugin Name: Customized Supportcenter - TeamProQ by Page-Effect 
 Plugin URI: 
 Description: This plugin for customized supportcenter pages
 Version: 0.0.0
@@ -16,9 +16,7 @@ if ( ! defined( 'PE_supportcenter_Plugin_Path' ) ) {
 define( 'PE_SC_Main_Page_slug', 'supportcenter');
 define( 'PE_SC_CTP_name', 'supportcenter');
 
-//Generate new Custom type Post: supportcenter, and taxonomy[Theme]  ///////////////////
-// if it is not initialized yet, then 
-// if we want to update CPT property, we need to make it run again without if-consition. 
+//Generate new Custom type Post: supportcenter, new column in admin, filter for modul  /////////////////// 
 if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
   require_once  PE_supportcenter_Plugin_Path . 'includes/Init_CPT_supportcenter.php';
   $initialize_ctp = new PE_Initializ_CTP();
@@ -27,9 +25,10 @@ if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
 // Supportcenter main page 
 // require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateSCmainPage.php';
 // module posts 
-// require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulePosts.php';
+//  require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulPosts.php';
 // childern posts
-// require_once plugin_dir_path(__FILE__) . 'includes/CreateChildPosts.php';
+//  require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulChildern.php';
+
 // delet all the posts with CTP:supportcenter
 // $wpdb->query(
 // 	$wpdb->prepare(
@@ -45,7 +44,8 @@ if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
 // );
 
 
-require_once plugin_dir_path(__FILE__) . 'includes/ModulPageView.php';
+require_once plugin_dir_path(__FILE__) . 'includes/view/SC_MainPageView.php';
+require_once plugin_dir_path(__FILE__) . 'includes/view/SC_ModulPageView.php';
 
 
 class PE_style_and_js{
@@ -55,7 +55,10 @@ class PE_style_and_js{
 
   public function style_main(){
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
-      wp_enqueue_style('supportcenter-css',  plugin_dir_url( __FILE__ ) .'includes/style.css', array(),false);
+      wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_overall.css', array(),false);
+      if(is_page( PE_SC_Main_Page_slug )){
+        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css', array(),false);
+      }
     }
     if(is_singular( PE_SC_CTP_name )){
       wp_enqueue_script('supportcenter-js',  plugin_dir_url( __FILE__ ) .'includes/js_functions.js', array(),true);

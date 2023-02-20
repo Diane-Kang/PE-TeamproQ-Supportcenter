@@ -9,7 +9,8 @@
 	padding:0px
 }
 .et_post_meta_wrapper, 
-.et_pb_section_0_tb_footer{
+.et_pb_section_0_tb_footer,
+.main_title{
   display:none;
 }
 
@@ -69,10 +70,10 @@
 /* title styling */
 .supportcenter_title_container h1.entry-title{
 	font-family:lato;
-	font-size:5em;
+	font-size:6.25em;
 	letter-spacing: 0px;
 	/* padding em: defined by 	calcuated font-size, so here if font-size: 16px * 5em: 80px then, padding 1em = 80px*/
-	padding-bottom: 0.75em;
+	margin-bottom: 0.75em;
 }
 /* background pattern wrapper */
 .supportcenter_header .bg_wrap{
@@ -136,6 +137,18 @@
 .breadcrumms div:last-child{
 	color:#F39200;
 }
+
+
+/* Icon */
+.icon-and-capture {
+  height: 7.3em;
+  width: 7.3em;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow:0px 3px 10px #01010150 ;
+}
+
 /*
 ** Module description **
 */
@@ -146,17 +159,8 @@
 	align-items:center;
 	padding: 5em 0em 7em 0em;
 }
-.modul-description i{
-	/* re-initialize, in oder to take reference from .supportcenter  */
-	font-size:1em;
-	border-radius: 15px;
-	box-shadow: #00000050 0px 3px 15px;
-}
-.modul-description i::before{
-	font-size:3.5em;
-	padding:0.4em;
-}
-.modul-description div{
+
+.modul-description div:nth-child(2){
 	font-size:1.5em;
 	line-height:1.25em;
 	font-weight:700;

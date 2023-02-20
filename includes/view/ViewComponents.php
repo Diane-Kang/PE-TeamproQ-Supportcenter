@@ -1,33 +1,4 @@
 <?php
-
-//Remove 'Private:' from private post title
-add_filter( 'private_title_format', function ( $format ) {
-  return '%s';
-} );
-//content customize
-add_filter( 'the_content', 'supportcenter_view' );
-
-function supportcenter_view($content){
-  global $post;
-  $postId = $post->ID;
-  // initialize 
-  
-  //only for supportcenter ctp and only for modul 
-  if(is_singular( 'supportcenter' ) && !get_post_parent($postId)){
-    $supportcenter_header = supportcenter_header();
-    // breadcrumms
-    $breadcrumms = supportcenter_breadcrumms();
-    // modul description 
-    $modul_description = supportcenter_modul_description($postId);
-    // Child Posts
-    $childern_contents = supportcenter_get_childern_contents($postId);
-    //scroll button
-    $scroll_button = get_scroll_button_html();
-    //modify the incoming content 
-    $content = $supportcenter_header . $breadcrumms . $modul_description. $childern_contents. $scroll_button;
-  } 
-  return $content; 
-}
 function get_scroll_button_html(){
   $scroll_button_html = '
     <div class="scroll-buttons">
@@ -44,6 +15,8 @@ function supportcenter_get_childern_contents($postId){
     'post_type' => 'supportcenter',
     'post_parent' => $postId,
     'posts_per_page' => -1,
+    'orderby' => 'menu_order',
+    'order' => 'ASC',
     ); 
   $childern = get_children( $args , ARRAY_A);
   $title_list='';
@@ -67,8 +40,8 @@ function supportcenter_get_childern_contents($postId){
 }
 
 
-function supportcenter_modul_description($postId){
-  $icon = '<i class="tpq-icon-font fonticon-immoverkauf"></i>';
+function supportcenter_modul_description($postId){            
+  $icon = '<div class="icon-and-capture"><i class="tpq-icon-font '. get_post_meta($postId, 'icon_class', true) .'"></i></div>';
   $content = '<div class="modul_content">'.get_the_content($postId).'</div>';
   $modul_description_html = '<div class="modul-description">'.$icon . $content. '</div>';
   return $modul_description_html;
@@ -80,9 +53,9 @@ function supportcenter_header() {
   $postId = $post->ID;
   $header_html='';
   $supportcenter_description = '
-    <div class="supportqa_content">
+    <h3 class="supportcenter_mainpage_content">
       '.get_the_content($postId).'
-    </div>
+    </h3>
   ';
   $searchbox = '
     <form class="searchbox" action="#">
@@ -101,7 +74,7 @@ function supportcenter_header() {
   ';
   $bottom_decoration = '<div class="bottom_inside_divider"></div>';
 
-  //only for supportcenter main or for supportcenter ctp and only for modul 
+  //only for supportcenter main  
   if( is_page('supportcenter')){
     $header_title = '
     <div class="supportcenter_title_container">
@@ -109,7 +82,7 @@ function supportcenter_header() {
     </div>
     ';
     $header_html=$header_title . $supportcenter_description .  $searchbox;
-  } 
+  } //for supportcenter ctp and only for modul
   else if((is_singular( 'supportcenter' ) && !get_post_parent($postId))){
     $header_title = '
     <div class="supportcenter_title_container">
