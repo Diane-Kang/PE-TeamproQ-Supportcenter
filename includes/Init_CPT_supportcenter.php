@@ -16,37 +16,37 @@ class PE_Initializ_CTP{
   function create_posttype() {
 
     /**
-    * Register a custom post type called "supportqa".
+    * Register a custom post type called "Suppportcenter".
     *
     * @see get_post_type_labels() for label keys.
     */
 
     $labels = array(
-      'name'                  => __( 'Support Q&A' ),
-      'singular_name'         => __( 'supportqa' ),
+      'name'                  => __( 'Supportcenter' ),
+      'singular_name'         => __( 'supportcenter' ),
     );
 
     $args = array(
       'labels'             => $labels,
-      'description'        => 'This is for die entries of Support Center Q and A.',
+      'description'        => 'This is for die entries of Supportcenter Q and A.',
       'public'             => true,
       // 'publicly_queryable' => true,
       'show_ui'            => true,
       'show_in_menu'       => true,
       // Default: true – set to $post_type, let it default, ‘string’ – /?{query_var_string}={single_post_slug} will work as intended.
-      // 'query_var'          => true,
+      // 'query_var'          => false,
       // alllow rewrite, Default: true and use $post_type as slug, let it defualt
-      // 'rewrite'            => array( 'slug' => 'Supportqa' ),
+      'rewrite'            => array( 'slug' => ''),
       'capability_type'    => 'post',
-      'has_archive'        => true,
+      'has_archive'        => false,
       'hierarchical'       => true,
-      'menu_position'      => 50, //5 – below page
-      'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+      'menu_position'      => 50, //50 – below page
+      'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'page-attributes'),
       // 'taxonomies'         => array( 'theme' ),
       'show_in_rest'       => true // it is for gutenberg, but let it 
     );
   
-    register_post_type( 'supportqa', $args );
+    register_post_type( 'supportcenter', $args );
   }
 
   function create_custom_taxonomy_theme() {
@@ -68,7 +68,7 @@ class PE_Initializ_CTP{
       );
   
     // Now register the taxonomy
-      register_taxonomy('theme',array('supportqa'), array(
+      register_taxonomy('theme',array('supportcenter'), array(
           'hierarchical' => true,
           'labels' => $labels,
           'show_ui' => true,
