@@ -18,20 +18,35 @@ function supportcenter_get_childern_contents($postId){
     'orderby' => 'menu_order',
     'order' => 'ASC',
     ); 
-  $childern = get_children( $args , ARRAY_A);
+  // $childern = get_children( $args , ARRAY_A);
+  // $title_list='';
+  // $content_list = '';
+  
+  // if ( $childern ) {
+  //   foreach ( $childern as $child ) {
+  //     $title_list .= '<li><a href="#'.$child["post_name"].'">'.$child["post_title"].'</a></li>';
+  //     $content_list .= '
+  //     <div class="single" id ='.$child["post_name"].'>'.'
+  //       <div class="question">'. $child["post_title"].'</div>
+  //       <div class="answer">'.$child["post_content"].'</div>
+  //     </div>' ;
+  //   }
+  // }
+  $childern = get_children( $args);
   $title_list='';
   $content_list = '';
   
   if ( $childern ) {
     foreach ( $childern as $child ) {
-      $title_list .= '<li><a href="#'.$child["post_name"].'">'.$child["post_title"].'</a></li>';
+      $title_list .= '<li><a href="#'. $child->post_name .'">'.$child->post_title.'</a></li>';
       $content_list .= '
-      <div class="single" id ='.$child["post_name"].'>'.'
-        <div class="question">'. $child["post_title"].'</div>
-        <div class="answer">'.$child["post_content"].'</div>
+      <div class="single" id ='.'>'.'
+        <div class="question">'. $child->post_title . '</div>
+        <div class="answer">'. $child->post_content .'</div>
       </div>' ;
     }
   }
+
   $title_list = '<div class="title-wrapper"><ul>'.$title_list.'</ul></div>';
   $content_list = '<div class="qanda-wrapper">'.$content_list.'</div>';
   

@@ -25,9 +25,9 @@ if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
 // Supportcenter main page 
 // require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateSCmainPage.php';
 // module posts 
-//  require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulPosts.php';
+// require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulPosts.php';
 // childern posts
-//  require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulChildern.php';
+// require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateModulChildern.php';
 
 // delet all the posts with CTP:supportcenter
 // $wpdb->query(

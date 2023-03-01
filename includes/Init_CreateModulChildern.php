@@ -23,9 +23,8 @@ function insertMyChildPosts() {
   $QAs = generate_list_from_csv();
   $i = 1;
   foreach ($QAs as $QA) {
-
     $lipsum = simplexml_load_file('http://www.lipsum.com/feed/xml?amount=1&what=paras&start=0')->lipsum;
-    $lipsum_text = ''.$lipsum;
+    $lipsum_text = ''.$lipsum ;
     wp_insert_post(array(
       'post_type' => 'supportcenter',
       'post_title' => $QA['title'],

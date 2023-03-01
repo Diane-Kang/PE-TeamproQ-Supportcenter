@@ -23,7 +23,6 @@ function insertMyPosts() {
 
     $lipsum = simplexml_load_file('http://www.lipsum.com/feed/xml?amount=20&what=words&start=0')->lipsum;
     $content = 'Mit dem Modul "'.$module['name'].'" haben Sie eine Möglichkeit an der Hand, ';
-
     wp_insert_post(array(
       'post_type' => 'supportcenter',
       'post_title' => $module['name'],

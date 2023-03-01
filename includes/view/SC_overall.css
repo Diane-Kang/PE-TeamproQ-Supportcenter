@@ -37,11 +37,18 @@
 ** from here, suppportcenter custom design css begint **
 */
 
-/* redefine my container size and font-size*/
+/* redefine my container size, font-size, basic text properties*/
 #page-container #main-content .container{
   width:90%;
   font-size:16px;
   font-family:lato;
+}
+.supportcenter p{
+	text-align: unset;
+}
+.supportcenter ul, 
+.supportcenter ol {
+  margin-left: 1rem;
 }
 
 /*
@@ -166,6 +173,56 @@
 	font-weight:700;
 	width:24em;
 	color:#4A4A49;
+}
+/*
+** Q and A block **
+*/
+.q_and_a_contents{
+	display:grid;
+	grid-template-columns: 3.5fr 6.5fr;
+	grid-gap:5vw;
+	background:linear-gradient(#00000015,#00000015) center/2px 100% no-repeat;
+	background-position: 35% 0;
+	margin-right:8vw;
+}	
+.q_and_a_contents .title-wrapper li{
+	list-style:none;
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:2.5em;
+}
+
+.qanda-wrapper .single .question{
+	font-size:2em;
+	padding-bottom: 1.3em;
+	font-weight:900;
+}
+
+.qanda-wrapper .single .answer{
+	font-size:1.1em;
+	padding-bottom:5em;
+}
+
+.scroll-buttons{
+	position:fixed;
+	right:5vw;
+	top:30%;
+	display:grid;
+	grid-row-gap:1em;
+}
+
+.scroll-buttons button{
+	height: 4.5em;
+	width: 4.5em;
+	border:0px;
+	border-radius:15px;
+	background-color:#E3E3E3;
+	box-shadow: 0px 3px 6px #00000029;
+	display:none;
+}
+
+.scroll-buttons.show button{
+	display:block;
 }
 
 
