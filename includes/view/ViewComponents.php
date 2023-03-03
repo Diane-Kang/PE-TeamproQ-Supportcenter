@@ -80,8 +80,16 @@ function supportcenter_header() {
   ';
   $bottom_decoration = '<div class="bottom_inside_divider"></div>';
 
+  if ( is_page('supportcenter')){
+    $header_title = '
+    <div class="supportcenter_title_container">
+      <h1 class="entry-title">'.get_the_title($postId).'</h1>
+    </div>
+  ';
+    $header_html = $header_title . $searchbox;
+  }
   //for supportcenter ctp and only for modul
-  if( (is_singular( 'supportcenter' ) && !get_post_parent($postId)) || is_page('supportcenter')){
+  if( is_singular( 'supportcenter' ) && !get_post_parent($postId)){
     $header_title = '
     <div class="supportcenter_title_container">
       <h1 class="entry-title">Modul '.get_the_title($postId).'</h1>
