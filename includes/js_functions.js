@@ -1,32 +1,43 @@
-/*Definde a function for waiting target dependcy(callback)*/
-var waitForTarget = function(target, callback) {
-  if (typeof target === 'undefined') {
+
+let btnScrollToTop = document.querySelector(".scroll-buttons");
+
+
+
+let waitForTarget = function(target, callback) {
+  // If the target is not recognized, (html is not ready)
+  if (target === null) {
+    // then wait 100ms 
     setTimeout(function() {
+      // try again 
+      let target = document.querySelector(".scroll-buttons");
       waitForTarget(target, callback);
     }, 100);
+  // if the target is there
   } else {
+    // run the function 
     callback();
   }
 };
 
-/*Wrap the target code with waitingfunction, where your dependency is missing*/
+var showBtn = () => {
+  window.addEventListener('scroll', e => {
+    document.querySelector(".scroll-buttons").style.display = window.scrollY > 20 ? 'block' : 'none';
+  });
+  document.querySelector(".scroll-buttons").addEventListener("click", scrollToTop);
 
+}
 
-function topFunction(){
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+function scrollToTop() {
+  document.documentElement.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 
-///////////////////////////////////////////////////////////
-// Sticky scroll button
 
-const observer = new IntersectionObserver(entries => {
-  console.log(entries)
-})
+waitForTarget(btnScrollToTop, showBtn);
 
-window.onload = function(){
-  observer.observe(document.getElementById("wie-lassen-sich-einheiten-teilen"))
-}
+
+
+

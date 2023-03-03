@@ -54,10 +54,16 @@ class PE_style_and_js{
   }
 
   public function style_main(){
+    // for all Supportcenter Pages
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
-      wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_overall.css', array(),false);
+      wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css', array(),false);
+      // only Suppportcenter Main 
       if(is_page( PE_SC_Main_Page_slug )){
         wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css', array(),false);
+      }
+      // only Suppportcenter Module
+      else if(is_singular( PE_SC_CTP_name )){
+        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_ModulePage.css', array(),false);
       }
     }
     if(is_singular( PE_SC_CTP_name )){
@@ -68,19 +74,6 @@ class PE_style_and_js{
 }
 $pe_style_and_js = new PE_style_and_js();
 
-// class Old_support_css{
-//   public function __construct(){
-//     add_action( 'wp_enqueue_scripts', array($this, 'old-style_main'), 10, 1 );
-//   }
-
-//   public function old_style_main(){
-//     if(is_singular( 'support' )){
-//       wp_enqueue_style('old-support-css',  plugin_dir_url( __FILE__ ) .'includes/old-support-style.css', array(),false);
-//     }
-//   }
-// }
-// $old_support_css = new Old_support_css();
-
 
 function debugging_shortcode(){
 print_r(is_singular( 'supportcenter' ) );
@@ -90,36 +83,3 @@ return is_singular( 'supportcenter' );
 
 
 add_shortcode('debugging_shortcode_show', 'debugging_shortcode');
-// function my_content_filter($content){
-//   return $content . 'filter content' ;
-//  }
-
-//  add_filter( 'the_content', 'my_content_filter');
-
-
-// $supportcenter_main_slug = 'teamproq-supportcenter-pe-custom';
-// // ///////////// Support Center main page view///////////////////
-// require_once  PE_supportcenter_Plugin_Path . 'includes/SupportCenter_main_view.php';
-// $suppportCenter_main_view = new PE_SuppportCenter_main_view($supportcenter_main_slug);
-// // Before, After, elements etc  
-// // add_action( 'astra_single_header_after', 'ctp_unternehmen_before_content');
-// // add_action( 'astra_entry_content_after', 'after_content', 12);
-
-
-// // function ctp_unternehmen_before_content() {
-// //   if ( is_singular('unternehmen') ) {
-// //     $branche = get_the_terms( get_the_ID(), 'branche' );
-    
-// //     if (! empty($branche)) {
-// //       foreach($branche as $tag) {
-// //         $list_branchen .= '<span>' . $tag->name . '</span>';
-// //         }
-// //     }
-
-// ///////////// SupportQA Archeiv page view///////////////////
-// require_once  PE_supportcenter_Plugin_Path . 'includes/SupportQA_archeiv_view.php';
-// $supportQA_archeiv_view = new PE_SupportQA_archeiv_view();
-
-
-// ///////////// Support Center common element over pages like breadcrumms   ///////////////////
-// //'includes/SupportQA_elements.php';

@@ -9,28 +9,3 @@
   line-height: 1.2em;
   padding-bottom: 3.5em;
 }
-/*
-** Module Überblick **
-*/
-.module-ueberblick {
-  padding: 4em;
-	margin-bottom:4em;
-}
-.module-ueberblick > h2 {
-  font-size: 2em;
-  font-weight: 700;
-  margin-bottom: 1em;
-}
-.module {
-  display: flex;
-	justify-content: center;
-  flex-wrap: wrap;
-  margin: auto;
-  width: 62em;
-}
-.icon-text-wrapper {
-  margin: 1.5em 0;
-}
-.icon-and-capture {
-	margin:1.5em;
-}

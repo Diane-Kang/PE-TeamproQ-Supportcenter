@@ -25,8 +25,10 @@ function supportcenter_modul_view($content){
     $childern_contents = supportcenter_get_childern_contents($postId);
     //scroll button
     $scroll_button = get_scroll_button_html();
+    // module Überblick 
+    $modul_ueberblick = supportcenter_module_ueberblick();
     //modify the incoming content 
-    $content = $supportcenter_header . $breadcrumms . $modul_description. $childern_contents. $scroll_button;
+    $content = $supportcenter_header . $breadcrumms . $modul_description. $childern_contents. $modul_ueberblick . $scroll_button;
   } 
   return $content; 
 }

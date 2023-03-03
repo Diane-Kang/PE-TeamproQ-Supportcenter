@@ -40,16 +40,14 @@
 /* redefine my container size, font-size, basic text properties*/
 #page-container #main-content .container{
   width:90%;
-  font-size:16px;
+	/* wenn Viewwidth 1920px ist, dann ist die Fontsize 16px, wenn Viewwidth 320px ist, dann ist die Fontsize 12px */
+  font-size:calc( 14px + 2 * (100vw - 320px) / 1600 );
   font-family:lato;
 }
 .supportcenter p{
-	text-align: unset;
+	text-align: justify;
 }
-.supportcenter ul, 
-.supportcenter ol {
-  margin-left: 1rem;
-}
+
 
 /*
 ** Supportcenter header **
@@ -80,7 +78,10 @@
 	font-size:6.25em;
 	letter-spacing: 0px;
 	/* padding em: defined by 	calcuated font-size, so here if font-size: 16px * 5em: 80px then, padding 1em = 80px*/
+	max-width: 90%;
+	margin: auto;
 	margin-bottom: 0.75em;
+		
 }
 /* background pattern wrapper */
 .supportcenter_header .bg_wrap{
@@ -99,7 +100,7 @@
 /* search box styling */
 .searchbox{
 	margin:auto;
-	width:50em;
+	max-width:650px;
 	position:relative;
 }
 .searchbox input{
@@ -128,131 +129,46 @@
 	transform: rotateY(180deg);
 }
 
-/*
-** breadcrumms **
-*/
-.breadcrumms{
-	display: flex;
-	align-items: center;
-	font-size:1.1em;
-	font-weight:bold;
-	margin-left:10%;
-}
-.breadcrumms i{
-	font-size:1.5em;
-}
-.breadcrumms div:last-child{
-	color:#F39200;
-}
 
+/*
+** Module Überblick **
+*/
+.module-ueberblick {
+  padding: 4em;
+	margin-bottom:4em;
+}
+.module-ueberblick > h2 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+.module {
+  display: flex;
+	justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 62em;
+}
 
 /* Icon */
-.icon-and-capture {
-  height: 7.3em;
-  width: 7.3em;
-  display: flex;
-  align-items: center;
-  border-radius: 15px;
+body .icon-and-capture i {
+	font-size: 3.375em;
+	padding: 0.5em;
+	border-radius: 15px;
   box-shadow:0px 3px 10px #01010150 ;
 }
+.icon-and-capture {
+  display: flex;
+  align-items: center;
 
-/*
-** Module description **
-*/
-.modul-description{
-	display:flex;
-	gap:2em;
-	justify-content:center;
-	align-items:center;
-	padding: 5em 0em 7em 0em;
+	margin:1.5em;
 }
-
-.modul-description div:nth-child(2){
-	font-size:1.5em;
-	line-height:1.25em;
-	font-weight:700;
-	width:24em;
-	color:#4A4A49;
+.icon-text-wrapper {
+  margin: 1.5em 0;
 }
-/*
-** Q and A block **
-*/
-.q_and_a_contents{
-	display:grid;
-	grid-template-columns: 3.5fr 6.5fr;
-	grid-gap:5vw;
-	background:linear-gradient(#00000015,#00000015) center/2px 100% no-repeat;
-	background-position: 35% 0;
-	margin-right:8vw;
-}	
-.q_and_a_contents .title-wrapper li{
-	list-style:none;
-	font-size:1.2em;
-	font-weight:bold;
-	line-height:2.5em;
+.icon-text-wrapper p {
+  text-align: center;
 }
-
-.qanda-wrapper .single .question{
-	font-size:2em;
-	padding-bottom: 1.3em;
-	font-weight:900;
-}
-
-.qanda-wrapper .single .answer{
-	font-size:1.1em;
-	padding-bottom:5em;
-}
-
-.scroll-buttons{
-	position:fixed;
-	right:5vw;
-	top:30%;
-	display:grid;
-	grid-row-gap:1em;
-}
-
-.scroll-buttons button{
-	height: 4.5em;
-	width: 4.5em;
-	border:0px;
-	border-radius:15px;
-	background-color:#E3E3E3;
-	box-shadow: 0px 3px 6px #00000029;
-	display:none;
-}
-
-.scroll-buttons.show button{
-	display:block;
-}
-
-
-/* @media only screen and (min-width: 981px){
-  .et_pb_section_0_tb_body {
-    max-width: 90%;
-  }
-}
-form {
-  width: 600px;
-  margin: 100px auto;
-}
-
-input[type="search"] {
-  width: 400px;
-  height: 40px;
-  font-size: 16px;
-  padding: 0px 20px 0px 40px;
-  border-radius: 5px;
-  outline: none;
-  border: solid gray 2px;
-}
-
-body .module-hilfe a {
-  box-shadow: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 20px;
-  border-radius: 10%;
-} */
-
 /* no space between header and content, for breadcrums */
 .et_builder_inner_content
   #supportcenter-content.et_pb_section.supportcenter-content,
@@ -261,3 +177,51 @@ body .module-hilfe a {
   .et_pb_row {
   padding: 0;
 }
+
+
+
+@media screen and (max-width:1200px) {
+	.supportcenter_title_container h1.entry-title {
+		font-size: 4.25em;
+	}
+	.searchbox {
+		width: 90%;
+	}
+	.module-ueberblick {
+		padding:4em 0 0 0;
+	}
+	.module{
+		width:unset;
+		max-width:950px;
+	}
+
+}
+
+@media screen and (max-width:680px) {
+	.supportcenter_title_container h1.entry-title {
+		font-size: 2.25em;
+	}
+	.searchbox input {
+		font-size: 1.1em;
+	}
+	.searchbox input::placeholder {
+		font-size: 1em;
+	}
+	.searchbox button i {
+		font-size: 1em;
+	}
+	/* body .icon-and-capture i {
+		font-size:2.375em;
+	} */
+	.icon-text-wrapper p {
+		font-size: 0.9em;
+	}
+	.module-ueberblick > h2 {
+		font-size: 1.5em;
+	}
+	.module-ueberblick .module{
+		margin-left: -5%;
+  	width: 110%;
+	}
+}
+
