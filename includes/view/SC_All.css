@@ -44,8 +44,15 @@
   font-size:calc( 14px + 2 * (100vw - 320px) / 1600 );
   font-family:lato;
 }
+li{
+	list-style-position: outside;
+}
 .supportcenter p{
 	text-align: justify;
+}
+/* to againist strange css rule */
+.supportcenter .q_and_a_contents .answer p{
+	padding-bottom:1em;
 }
 
 
@@ -98,9 +105,12 @@
 	display: block;
 }
 /* search box styling */
+.search-wrapper {
+	margin: auto;
+	max-width: 650px;
+	position:relative;
+}
 .searchbox{
-	margin:auto;
-	max-width:650px;
 	position:relative;
 }
 .searchbox input{
@@ -127,6 +137,42 @@
 	font-size:2em;
 	font-weight:900;
 	transform: rotateY(180deg);
+}
+.search-results{
+	font-size: 1.5em;
+	line-height: 1.5em;
+	width: 100%;
+	background: #fff;
+	position: absolute;
+	z-index: 1;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spinner-loader {
+  margin: 5px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 0.25rem solid rgba(0, 0, 0, 0.2);
+  border-top-color: black;
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
 }
 
 
@@ -184,7 +230,7 @@ body .icon-and-capture i {
 	.supportcenter_title_container h1.entry-title {
 		font-size: 4.25em;
 	}
-	.searchbox {
+	.search-wrapper {
 		width: 90%;
 	}
 	.module-ueberblick {

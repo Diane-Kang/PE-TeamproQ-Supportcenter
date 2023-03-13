@@ -62,9 +62,11 @@
 	line-height: 1.5em;
 	margin-bottom: 1.5em;
 }
-.qanda-wrapper ul, 
+.qanda-wrapper ul {
+	margin-left: 1rem;
+} 
 .qanda-wrapper ol {
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 .qanda-wrapper .single .question{
 	font-size:2em;

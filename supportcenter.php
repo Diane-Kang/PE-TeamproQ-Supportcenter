@@ -50,13 +50,14 @@ require_once plugin_dir_path(__FILE__) . 'includes/view/SC_ModulPageView.php';
 
 class PE_style_and_js{
   public function __construct(){
-    add_action( 'wp_enqueue_scripts', array($this, 'style_main'), 10, 1 );
+    add_action( 'wp_enqueue_scripts', array($this, 'style_and_script'));
   }
 
-  public function style_main(){
+  public function style_and_script(){
     // for all Supportcenter Pages
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
       wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css', array(),false);
+      wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','','',true);
       // only Suppportcenter Main 
       if(is_page( PE_SC_Main_Page_slug )){
         wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css', array(),false);

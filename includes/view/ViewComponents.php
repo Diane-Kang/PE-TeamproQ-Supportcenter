@@ -64,10 +64,14 @@ function supportcenter_header() {
     </h3>
   ';
   $searchbox = '
-    <form class="searchbox" action="#">
-      <input type="search" placeholder="Wie können wir Ihnen helfen?">
-      <button type="submit"><i class="et-pb-icon">&#x55;</i></button>
-    </form>
+    <div class="search-wrapper">
+      <form class="searchbox" action="#">
+        <input type="search" id="search-term" placeholder="Wie können wir Ihnen helfen?">
+        <button type="submit"><i class="et-pb-icon">&#x55;</i></button>
+      </form>
+      <div class="search-results" id="search-results">
+      </div>
+    </div>
   ';
   $background_image = '
     <span class="bg_wrap">
@@ -86,19 +90,16 @@ function supportcenter_header() {
       <h1 class="entry-title">'.get_the_title($postId).'</h1>
     </div>
   ';
-    $header_html = $header_title . $searchbox;
   }
   //for supportcenter ctp and only for modul
-  if( is_singular( 'supportcenter' ) && !get_post_parent($postId)){
+  else if( is_singular( 'supportcenter' ) && !get_post_parent($postId)){
     $header_title = '
     <div class="supportcenter_title_container">
       <h1 class="entry-title">Modul '.get_the_title($postId).'</h1>
     </div>
   ';
-    $header_html = $header_title . $searchbox;
-  }else {
-    $header_html = "this page is not for supportcenter plugin";
   }
+  $header_html = $header_title . $searchbox;
   // add bottom decoration 
   $header_html = $background_image . $header_html . $bottom_decoration; 
 
