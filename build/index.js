@@ -12,11 +12,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
 class Search {
   // 1. describe and create/initiate our object
   constructor() {
     this.resultsDiv = document.querySelector("#search-results");
     this.searchField = document.querySelector("#search-term");
+    this.searchField.value = '';
     this.events();
     this.isSpinnerVisible = false;
     this.previousValue;
@@ -37,7 +41,7 @@ class Search {
           this.resultsDiv.innerHTML = '<div class="spinner-loader"></div>';
           this.isSpinnerVisible = true;
         }
-        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        this.typingTimer = setTimeout(this.getResults.bind(this), 750);
       } else {
         this.resultsDiv.innerHTML = "";
         this.isSpinnerVisible = false;
@@ -47,11 +51,52 @@ class Search {
     console.log(this.searchField.value);
   }
   getResults() {
-    this.resultsDiv.html("Imagine real search results here...");
-    this.isSpinnerVisible = false;
+    jQuery.ajax({
+      type: "GET",
+      url: 'http://localhost:10033/wp-json/PE_supportcenter/posts?term=' + this.searchField.value,
+      data: '',
+      datatype: "html",
+      success: results => {
+        if (!results.length) {
+          this.resultsDiv.innerHTML = `
+           <div>no results</div>`;
+        } else {
+          this.resultsDiv.innerHTML = `
+
+            ${results.map(item => `<div><a class="scrollLink" href="./${item.modul.slug}#${item.slug}">${item.title} - ${item.modul.name}</a></div>`).join("")}
+`;
+          this.isSpinnerVisible = false;
+        }
+
+        // let anchorlinks = document.querySelectorAll('.scrollLink')
+        // for (let item of anchorlinks) { // relitere 
+        //   item.addEventListener('click', (e)=> {
+        //     let hashval = item.getAttribute('href')
+        //     let target = document.querySelector(hashval)
+        //     target.scrollIntoView({
+        //       behavior: 'smooth',
+        //       block: 'start'
+        //     })
+        //     history.pushState(null, null, hashval)
+        //     e.preventDefault()
+        //   })
+        // }
+      }
+    });
   }
 }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Search);
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = window["jQuery"];
 
 /***/ })
 
@@ -82,6 +127,18 @@ class Search {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

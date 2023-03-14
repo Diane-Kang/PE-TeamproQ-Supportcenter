@@ -17,10 +17,10 @@ define( 'PE_SC_Main_Page_slug', 'supportcenter');
 define( 'PE_SC_CTP_name', 'supportcenter');
 
 //Generate new Custom type Post: supportcenter, new column in admin, filter for modul  /////////////////// 
-if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
+// if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
   require_once  PE_supportcenter_Plugin_Path . 'includes/Init_CPT_supportcenter.php';
   $initialize_ctp = new PE_Initializ_CTP();
-}
+// }
 
 // Supportcenter main page 
 // require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateSCmainPage.php';
@@ -56,19 +56,19 @@ class PE_style_and_js{
   public function style_and_script(){
     // for all Supportcenter Pages
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
-      wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css', array(),false);
-      wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','','',true);
+      wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css','','',false);
+      wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','jquery','',true);
       // only Suppportcenter Main 
       if(is_page( PE_SC_Main_Page_slug )){
-        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css', array(),false);
+        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css','','',false);
       }
       // only Suppportcenter Module
       else if(is_singular( PE_SC_CTP_name )){
-        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_ModulePage.css', array(),false);
+        wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_ModulePage.css','','',false);
       }
     }
     if(is_singular( PE_SC_CTP_name )){
-      wp_enqueue_script('supportcenter-js',  plugin_dir_url( __FILE__ ) .'includes/js_functions.js', array(),true);
+      wp_enqueue_script('supportcenter-js',  plugin_dir_url( __FILE__ ) .'includes/js_functions.js','','',true);
     }
 
   }

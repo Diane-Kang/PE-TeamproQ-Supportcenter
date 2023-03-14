@@ -109,13 +109,16 @@ return '<div class="supportcenter_header">' . $header_html . '</div>';
 
 function supportcenter_breadcrumms(){
   // this is only for the suppportcenter 
-  if(!is_singular( 'supportcenter' )) return '';
-  if(is_singular('supportcenter')){
-    global $post;
-    $breadcrumms = "";
-    $icon = '<i class="et-pb-icon">&#x35;</i>';
-    $bc_startseite = '<a href="/">Startseite</a>';
-    $bc_supportcenter = '<a href="/supportcenter/">Suppportcenter</a>';
+  global $post;
+  $breadcrumms = "";
+  $icon = '<i class="et-pb-icon">&#x35;</i>';
+  $bc_startseite = '<a href="/">Startseite</a>';
+  $bc_supportcenter = '<a href="/supportcenter/">Suppportcenter</a>';
+  
+  if(is_page( 'supportcenter' )) {
+    $breadcrumms .= $bc_startseite .'<div>' . $icon . $bc_supportcenter .'</div>';
+  }
+  else if(is_singular('supportcenter')){
     $bc_current  = '<div>'. $post->post_title. '</div>';
     $breadcrumms .= $bc_startseite .'<div>' . $icon . $bc_supportcenter .'</div><div>'.$icon . $bc_current. '</div>';
   }

@@ -1,26 +1,3 @@
-/*
-** breadcrumms **
-*/
-.breadcrumms{
-	display: flex;
-	align-items: center;
-	font-size:1.1em;
-	font-weight:bold;
-	margin-left:10%;
-}
-.breadcrumms > div {
-	display: flex;
-	align-items: center;
-}
-.breadcrumms i{
-	font-size:1.5em;
-}
-.breadcrumms a{
-	color:#555;
-}
-.breadcrumms div:last-child :last-child{
-	color:#F39200;
-}
 
 /*
 ** Module description **
@@ -60,7 +37,7 @@
 	letter-spacing: 0.05em;
 	font-weight:bold;
 	line-height: 1.5em;
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 .qanda-wrapper ul {
 	margin-left: 1rem;
@@ -109,9 +86,7 @@
 	.modul-description {
 		gap: unset;
 	}
-	.breadcrumms {
-		margin-left: 0;
-	}
+
 	.q_and_a_contents {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -120,9 +95,7 @@
 	
 }
 @media screen and (max-width:640px) {
-	.breadcrumms {
-		flex-wrap:wrap;
-	}
+
 
 	.modul-description div:nth-child(2) {
 		font-size:1.2em;

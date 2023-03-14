@@ -34,6 +34,7 @@ class PE_Initializ_CTP{
       return $columns;
     }); 
 
+    add_action( 'rest_api_init', array($this,'private_json_api'));
     //create a custom taxonomy 
     //hook into the init action and call create_xy_taxonomies when it fires
     // add_action( 'init', array($this, 'create_custom_taxonomy_theme'));
@@ -120,34 +121,39 @@ class PE_Initializ_CTP{
      }
   }
 
-  // function create_custom_taxonomy_theme() {
-  //   // Add new taxonomy, make it hierarchical like categories
-  //   //first do the translations part for GUI
-  
-  //     $labels = array(
-  //         'name' => _x( 'Theme', 'taxonomy general name' ),
-  //         'singular_name' => _x( 'Theme', 'taxonomy singular name' ),
-  //         'search_items' =>  __( 'Search Theme' ),
-  //         'all_items' => __( 'All Theme' ),
-  //         'parent_item' => __( 'Parent Theme' ),
-  //         'parent_item_colon' => __( 'Parent Theme:' ),
-  //         'edit_item' => __( 'Edit Theme' ),
-  //         'update_item' => __( 'Update Theme' ),
-  //         'add_new_item' => __( 'Add New Theme' ),
-  //         'new_item_name' => __( 'New Theme Name' ),
-  //         'menu_name' => __( 'Theme' ),
-  //     );
-  
-  //   // Now register the taxonomy
-  //     register_taxonomy('theme',array('supportcenter'), array(
-  //         'hierarchical' => true,
-  //         'labels' => $labels,
-  //         'show_ui' => true,
-  //         'public' => true,
-  //         'show_in_rest' => true,
-  //         'show_admin_column' => true,
-  //         'query_var' => true,
-  //         'rewrite' => array( 'slug' => 'theme' ),
-  //     ));
-  //   }
+
+
+function private_json_api() {
+  register_rest_route( 'PE_supportcenter', '/posts/', array(
+  'methods' => WP_REST_SERVER::READABLE,
+  'callback' => array($this,'supportcenter_json_generator')
+  ));
+}
+
+function supportcenter_json_generator($data) {
+  $unternehmen = new WP_Query(array(
+  'post_type' => 'supportcenter',
+  'post_status' => 'private',
+  's' => sanitize_text_field($data['term']),
+  'posts_per_page' => 5,
+  ));
+
+  $unternehmen_geojson = array();
+
+  while ($unternehmen->have_posts()) {
+    $unternehmen->the_post();
+    array_push($unternehmen_geojson, array(
+      'id' => get_the_ID(),
+      'title' => get_the_title(),
+      'content' => get_the_content(),
+      'slug' => get_post_field( 'post_name', get_the_ID() ),
+      'modul' => array(
+        'name' => get_post_parent()->post_title,
+        'slug' => basename(get_permalink(get_post_parent()->ID)), 
+      ), 
+    ));
+  }
+  return $unternehmen_geojson;
+  }
+
 }
