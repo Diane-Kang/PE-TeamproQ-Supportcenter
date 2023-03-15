@@ -65,22 +65,22 @@ function supportcenter_header() {
   ';
   $searchbox = '
     <div class="search-wrapper">
-      <form class="searchbox" action="#">
+      <div class="searchbox">
         <input type="search" id="search-term" placeholder="Wie können wir Ihnen helfen?">
-        <button type="submit"><i class="et-pb-icon">&#x55;</i></button>
-      </form>
+        <button><i class="et-pb-icon">&#x55;</i></button>
+      </div>
       <div class="search-results" id="search-results">
       </div>
     </div>
   ';
   $background_image = '
-    <span class="bg_wrap">
-      <span class="background-pattern" 
+    <div class="bg_wrap">
+      <div class="background-pattern" 
         style="
           background-image: 
             url(&quot;'.plugin_dir_url( __FILE__ ).'asset/Sechsecke.svg&quot;);">
-      </span>
-    </span>
+      </div>
+    </div>
   ';
   $bottom_decoration = '<div class="bottom_inside_divider"></div>';
 
@@ -115,12 +115,9 @@ function supportcenter_breadcrumms(){
   $bc_startseite = '<a href="/">Startseite</a>';
   $bc_supportcenter = '<a href="/supportcenter/">Suppportcenter</a>';
   
-  if(is_page( 'supportcenter' )) {
-    $breadcrumms .= $bc_startseite .'<div>' . $icon . $bc_supportcenter .'</div>';
-  }
-  else if(is_singular('supportcenter')){
+  if(is_singular('supportcenter')){
     $bc_current  = '<div>'. $post->post_title. '</div>';
-    $breadcrumms .= $bc_startseite .'<div>' . $icon . $bc_supportcenter .'</div><div>'.$icon . $bc_current. '</div>';
+    $breadcrumms .= '<div>' . $bc_supportcenter .'</div><div>'.$icon . $bc_current. '</div>';
   }
   //wrap breadcrumms in wrapper 
   $breadcrumms = '<div class="breadcrumms">'. $breadcrumms.'</div>';

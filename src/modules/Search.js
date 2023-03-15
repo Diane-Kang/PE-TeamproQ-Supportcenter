@@ -9,6 +9,8 @@ class Search {
     this.isSpinnerVisible = false
     this.previousValue
     this.typingTimer
+    this.currentPageModul = scData.currentModul;
+    this.rootUrl = scData.root_url;
   }
 
   // 2. events
@@ -25,7 +27,7 @@ class Search {
           this.resultsDiv.innerHTML = '<div class="spinner-loader"></div>';
           this.isSpinnerVisible = true;
         }
-        this.typingTimer = setTimeout(this.getResults.bind(this), 750)
+        this.typingTimer = setTimeout(this.getResults.bind(this), 500)
       } else {
         this.resultsDiv.innerHTML = "";
         this.isSpinnerVisible = false
@@ -38,35 +40,27 @@ class Search {
   getResults() {
     jQuery.ajax({
       type: "GET",
-      url: 'http://localhost:10033/wp-json/PE_supportcenter/posts?term=' + this.searchField.value,
+      url: this.rootUrl + '/wp-json/PE_supportcenter/posts?term=' + this.searchField.value,
       data: '',
       datatype: "html",
       success: (results)=> {
+
         if(!results.length){
           this.resultsDiv.innerHTML =`
-           <div>no results</div>`;
+           <div>Kein Ergebnis</div>`;
         }
         else{
-          this.resultsDiv.innerHTML =`
-
-            ${results.map(item => `<div><a class="scrollLink" href="./${item.modul.slug}#${item.slug}">${item.title} - ${item.modul.name}</a></div>`).join("")}
-`;
+          this.resultsDiv.innerHTML =
+            `
+            ${results.map(
+              item => `
+                <div><a class="scrollLink" 
+                href="${this.currentPageModul==item.modul.slug ? '': `${this.rootUrl}/supportcenter/${item.modul.slug}`}#${item.slug}">${item.title} - ${item.modul.name}
+                </a></div>`
+              ).join("")}
+            `;
           this.isSpinnerVisible = false;  
         }
-        
-        // let anchorlinks = document.querySelectorAll('.scrollLink')
-        // for (let item of anchorlinks) { // relitere 
-        //   item.addEventListener('click', (e)=> {
-        //     let hashval = item.getAttribute('href')
-        //     let target = document.querySelector(hashval)
-        //     target.scrollIntoView({
-        //       behavior: 'smooth',
-        //       block: 'start'
-        //     })
-        //     history.pushState(null, null, hashval)
-        //     e.preventDefault()
-        //   })
-        // }
       }
     });
   }

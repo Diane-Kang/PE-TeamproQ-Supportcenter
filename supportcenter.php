@@ -17,10 +17,10 @@ define( 'PE_SC_Main_Page_slug', 'supportcenter');
 define( 'PE_SC_CTP_name', 'supportcenter');
 
 //Generate new Custom type Post: supportcenter, new column in admin, filter for modul  /////////////////// 
-// if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
+if (!(isset($initialize_ctp) && is_a($initialize_ctp, 'PE_Initializ_CTP'))) {
   require_once  PE_supportcenter_Plugin_Path . 'includes/Init_CPT_supportcenter.php';
   $initialize_ctp = new PE_Initializ_CTP();
-// }
+}
 
 // Supportcenter main page 
 // require_once plugin_dir_path(__FILE__) . 'includes/Init_CreateSCmainPage.php';
@@ -58,6 +58,12 @@ class PE_style_and_js{
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
       wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css','','',false);
       wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','jquery','',true);
+      
+      wp_localize_script('modules-js', 'scData' , array(
+        'root_url' => get_site_url(),
+        'currentModul' => get_post_field( 'post_name', get_post() ),
+      ));
+
       // only Suppportcenter Main 
       if(is_page( PE_SC_Main_Page_slug )){
         wp_enqueue_style('supportcenter-mainpage-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_MainPage.css','','',false);
@@ -74,13 +80,3 @@ class PE_style_and_js{
   }
 }
 $pe_style_and_js = new PE_style_and_js();
-
-
-function debugging_shortcode(){
-print_r(is_singular( 'supportcenter' ) );
-var_dump(is_singular( 'supportcenter' ));
-return is_singular( 'supportcenter' );
-}
-
-
-add_shortcode('debugging_shortcode_show', 'debugging_shortcode');

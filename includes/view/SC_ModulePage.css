@@ -96,17 +96,17 @@
 }
 @media screen and (max-width:640px) {
 
-
 	.modul-description div:nth-child(2) {
 		font-size:1.2em;
 		width: unset;
 	}
 	.q_and_a_contents {
-		margin-right: 0;
+		margin-right: unset;
 	}
-	
+	.qanda-wrapper .single .question {
+		font-size: 1.7em;
+	}
 }
-
 @media screen and (max-width:450px) {
 	.modul-description {
 		flex-direction: column;
