@@ -57,7 +57,7 @@ class PE_style_and_js{
     // for all Supportcenter Pages
     if(is_page( PE_SC_Main_Page_slug ) || is_singular( PE_SC_CTP_name )){
       wp_enqueue_style('supportcenter-overall-css',  plugin_dir_url( __FILE__ ) .'includes/view/SC_All.css','','',false);
-      wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','jquery','',true);
+      wp_enqueue_script('modules-js',  plugin_dir_url( __FILE__ ) .'build/index.js','jQuery','',true);
       
       wp_localize_script('modules-js', 'scData' , array(
         'root_url' => get_site_url(),
